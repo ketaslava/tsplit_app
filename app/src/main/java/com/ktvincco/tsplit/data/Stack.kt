@@ -46,10 +46,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 4), Pair(5, 2), previewText = "EN", actions = listOf("enter")),
         Inputkey(Pair(2, 4), Pair(5, 3), previewText = "\\N", inputText = "\n"),
         Inputkey(Pair(2, 4), Pair(5, 4), previewText = "TA", inputText = "  "),
-        Inputkey(Pair(1, 1), Pair(5, 4), previewText = "↑", circleIndicator = true, gesture = "moveCursorVertically", amount = 1),
-        Inputkey(Pair(2, 1),Pair(5, 4), previewText = "↓", circleIndicator = true, gesture = "moveCursorVertically", amount = -1),
-        Inputkey(Pair(1, 2),Pair(5, 4), previewText = "←", circleIndicator = true, gesture = "moveCursorHorizontally", amount = -1),
-        Inputkey(Pair(2, 2),Pair(5, 4), previewText = "→", circleIndicator = true, gesture = "moveCursorHorizontally", amount = 1),
+        Inputkey(Pair(1, 1), Pair(5, 4), previewText = "↑", circleIndicator = true, actions = listOf("moveCursorVertically"), gesture = "moveCursorVertically", amount = 1),
+        Inputkey(Pair(2, 1),Pair(5, 4), previewText = "↓", circleIndicator = true, actions = listOf("moveCursorVertically"), gesture = "moveCursorVertically", amount = -1),
+        Inputkey(Pair(1, 2),Pair(5, 4), previewText = "←", circleIndicator = true, actions = listOf("moveCursorHorizontally"), gesture = "moveCursorHorizontally", amount = -1),
+        Inputkey(Pair(2, 2),Pair(5, 4), previewText = "→", circleIndicator = true, actions = listOf("moveCursorHorizontally"), gesture = "moveCursorHorizontally", amount = 1),
 
         // Script change
 
@@ -118,6 +118,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Q", inputText = "q"),
         Inputkey(Pair(2, 2), Pair(5, 2), previewText = "K", inputText = "k"),
         Inputkey(Pair(1, 2), Pair(6, 1), previewText = "'", inputText = "'"),
+        Inputkey(Pair(1, 1), Pair(6, 2), previewText = "ß", inputText = "ß"),
 
         )),
 
@@ -164,6 +165,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Q", inputText = "Q", squareIndicator = true),
         Inputkey(Pair(2, 2), Pair(5, 2), previewText = "K", inputText = "K", squareIndicator = true),
         Inputkey(Pair(1, 2), Pair(6, 1), previewText = "'", inputText = "'"),
+        Inputkey(Pair(1, 1), Pair(6, 2), previewText = "ẞ", inputText = "ẞ", squareIndicator = true),
 
         )),
 
@@ -294,9 +296,9 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(1, 3), Pair(5, 2), previewText = "!", inputText = "!"),
         Inputkey(Pair(2, 3), Pair(5, 2), previewText = "‽", inputText = "‽"),
         Inputkey(Pair(3, 3), Pair(5, 2), previewText = "?", inputText = "?"),
-        Inputkey(Pair(4, 3), Pair(5, 2), previewText = "*", inputText = "*"),
+        Inputkey(Pair(3, 4), Pair(5, 2), previewText = "*", inputText = "*"),
 
-        Inputkey(Pair(2, 2), Pair(3, 3), previewText = ":", inputText = ":"),
+        Inputkey(Pair(2, 2), Pair(4, 4), previewText = ":", inputText = ":"),
         Inputkey(Pair(2, 2), Pair(4, 3), previewText = ",", inputText = ","),
         Inputkey(Pair(2, 2), Pair(5, 3), previewText = ".", inputText = "."),
         Inputkey(Pair(2, 2), Pair(6, 3), previewText = "—", inputText = "—"),
@@ -631,31 +633,57 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         // First layer
 
-        Inputkey(Pair(3, 1), previewText = "ẞ", inputText = "ẞ"),
-        Inputkey(Pair(2, 2), previewText = "ß", inputText = "ß"),
-
-        Inputkey(Pair(4, 1), previewText = "Ç", inputText = "Ç"),
-        Inputkey(Pair(5, 2), previewText = "ç", inputText = "ç"),
+        Inputkey(Pair(1, 1), previewText = "Þ", inputText = "Þ"),
+        Inputkey(Pair(2, 1), previewText = "μ", inputText = "μ"),
+        Inputkey(Pair(3, 1), previewText = "Ç", inputText = "Ç"),
+        Inputkey(Pair(4, 1), previewText = "ç", inputText = "ç"),
         Inputkey(Pair(5, 1), previewText = "$", inputText = "$"),
         Inputkey(Pair(6, 1), previewText = "£", inputText = "£"),
 
-        Inputkey(Pair(3, 2), previewText = "¢", inputText = "¢"),
-        Inputkey(Pair(4, 2), previewText = "₹", inputText = "₹"),
-        Inputkey(Pair(5, 2), previewText = "¥", inputText = "¥"),
-        Inputkey(Pair(6, 2), previewText = "₱", inputText = "₱"),
+        Inputkey(Pair(1, 2), previewText = "¢", inputText = "¢"),
+        Inputkey(Pair(2, 2), previewText = "₹", inputText = "₹"),
+        Inputkey(Pair(3, 2), previewText = "¥", inputText = "¥"),
+        Inputkey(Pair(4, 2), previewText = "₱", inputText = "₱"),
+        Inputkey(Pair(5, 2), previewText = "Ð", inputText = "Ð"),
+        Inputkey(Pair(6, 2), previewText = "ð", inputText = "ð"),
 
-        Inputkey(Pair(3, 3), previewText = "Ð", inputText = "Ð"),
-        Inputkey(Pair(4, 3), previewText = "ð", inputText = "ð"),
-        Inputkey(Pair(5, 3), previewText = "Þ", inputText = "Þ"),
-        Inputkey(Pair(6, 3), previewText = "Ŋ", inputText = "Ŋ"),
-
-        Inputkey(Pair(1, 3), previewText = "Ω", inputText = "Ω"),
-        Inputkey(Pair(2, 3), previewText = "Π", inputText = "Π"),
-        Inputkey(Pair(3, 3), previewText = "π", inputText = "π"),
+        Inputkey(Pair(1, 3), previewText = "L2", switchesToAdd = listOf("letters2")),
+        Inputkey(Pair(2, 3), previewText = "Ŋ", inputText = "Ŋ"),
+        Inputkey(Pair(3, 3), previewText = "Ω", inputText = "Ω"),
+        Inputkey(Pair(4, 3), previewText = "Π", inputText = "Π"),
+        Inputkey(Pair(5, 3), previewText = "π", inputText = "π"),
         Inputkey(Pair(6, 3), previewText = "ŋ", inputText = "ŋ"),
-        Inputkey(Pair(3, 4), previewText = "ı", inputText = "ı"),
+
+        Inputkey(Pair(3, 4), previewText = "ω", inputText = "ω"),
         Inputkey(Pair(4, 4), previewText = "ł", inputText = "ł"),
-        Inputkey(Pair(6, 2), previewText = "μ", inputText = "μ"),
+
+        )),
+
+    InputkeyPack("letters2",listOf<Inputkey>(
+
+        Inputkey(Pair(1, 1), previewText = "č", inputText = "č"),
+        Inputkey(Pair(2, 1), previewText = "ć", inputText = "ć"),
+        Inputkey(Pair(3, 1), previewText = "đ", inputText = "đ"),
+        Inputkey(Pair(4, 1), previewText = "š", inputText = "š"),
+        Inputkey(Pair(5, 1), previewText = "ž", inputText = "ž"),
+        Inputkey(Pair(6, 1), previewText = "ň", inputText = "ň"),
+
+        Inputkey(Pair(1, 2), previewText = "ř", inputText = "ř"),
+        Inputkey(Pair(2, 2), previewText = "ď", inputText = "ď"),
+        Inputkey(Pair(3, 2), previewText = "ť", inputText = "ť"),
+        Inputkey(Pair(4, 2), previewText = "ą", inputText = "ą"),
+        Inputkey(Pair(5, 2), previewText = "ę", inputText = "ę"),
+        Inputkey(Pair(6, 2), previewText = "ń", inputText = "ń"),
+
+        Inputkey(Pair(1, 3), previewText = "XX", switchesToRemove = listOf("letters2")),
+        Inputkey(Pair(2, 3), previewText = "ś", inputText = "ś"),
+        Inputkey(Pair(3, 3), previewText = "ź", inputText = "ź"),
+        Inputkey(Pair(4, 3), previewText = "ż", inputText = "ż"),
+        Inputkey(Pair(5, 3), previewText = "ğ", inputText = "ğ"),
+        Inputkey(Pair(6, 3), previewText = "ş", inputText = "ş"),
+
+        Inputkey(Pair(3, 4), previewText = "ț", inputText = "ț"),
+        Inputkey(Pair(4, 4), previewText = "ș", inputText = "ș"),
 
         )),
 
@@ -673,10 +701,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 2), previewText = "ō", circleIndicator = true, oneInputSwitches = listOf("variantsOfO")),
         Inputkey(Pair(2, 3), previewText = "ū", circleIndicator = true, oneInputSwitches = listOf("variantsOfU")),
 
-        Inputkey(Pair(3, 1), previewText = "æ", inputText = "æ"),
-        Inputkey(Pair(3, 2), previewText = "œ", inputText = "œ"),
-        Inputkey(Pair(3, 3), previewText = "ø", inputText = "ø"),
-        Inputkey(Pair(3, 4), previewText = "ñ", inputText = "ñ"),
+        Inputkey(Pair(6, 1), previewText = "æ", inputText = "æ"),
+        Inputkey(Pair(6, 2), previewText = "œ", inputText = "œ"),
+        Inputkey(Pair(5, 1), previewText = "ñ", inputText = "ñ"),
+        Inputkey(Pair(5, 2), previewText = "ø", inputText = "ø"),
 
         // Switches
         Inputkey(Pair(1, 3), previewText = "SH", switchesToAdd = listOf("vowelsShifted")),
@@ -684,6 +712,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         )),
 
     InputkeyPack("variantsOfA",listOf<Inputkey>(
+        Inputkey(Pair(1, 1), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "ā", inputText = "ā"),
         Inputkey(Pair(6, 2), previewText = "à", inputText = "à"),
         Inputkey(Pair(6, 3), previewText = "á", inputText = "á"),
@@ -694,6 +723,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
     )),
 
     InputkeyPack("variantsOfE",listOf<Inputkey>(
+        Inputkey(Pair(1, 2), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "ē", inputText = "ē"),
         Inputkey(Pair(6, 2), previewText = "è", inputText = "è"),
         Inputkey(Pair(6, 3), previewText = "é", inputText = "é"),
@@ -702,6 +732,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
     )),
 
     InputkeyPack("variantsOfI",listOf<Inputkey>(
+        Inputkey(Pair(2, 1), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "ī", inputText = "ī"),
         Inputkey(Pair(6, 2), previewText = "ì", inputText = "ì"),
         Inputkey(Pair(6, 3), previewText = "í", inputText = "í"),
@@ -711,6 +742,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
     )),
 
     InputkeyPack("variantsOfO",listOf<Inputkey>(
+        Inputkey(Pair(2, 2), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "ō", inputText = "ō"),
         Inputkey(Pair(6, 2), previewText = "ò", inputText = "ò"),
         Inputkey(Pair(6, 3), previewText = "ó", inputText = "ó"),
@@ -720,6 +752,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
     )),
 
     InputkeyPack("variantsOfU",listOf<Inputkey>(
+        Inputkey(Pair(2, 3), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "ū", inputText = "ū"),
         Inputkey(Pair(6, 2), previewText = "ù", inputText = "ù"),
         Inputkey(Pair(6, 3), previewText = "ú", inputText = "ú"),
@@ -737,17 +770,18 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 2), previewText = "Ō", circleIndicator = true, oneInputSwitches = listOf("variantsOfCapitalO")),
         Inputkey(Pair(2, 3), previewText = "Ū", circleIndicator = true, oneInputSwitches = listOf("variantsOfCapitalU")),
 
-        Inputkey(Pair(3, 1), previewText = "Æ", inputText = "Æ"),
-        Inputkey(Pair(3, 2), previewText = "Œ", inputText = "Œ"),
-        Inputkey(Pair(3, 3), previewText = "Ø", inputText = "Ø"),
-        Inputkey(Pair(3, 4), previewText = "Ñ", inputText = "Ñ"),
+        Inputkey(Pair(6, 1), previewText = "Æ", inputText = "Æ"),
+        Inputkey(Pair(6, 2), previewText = "Œ", inputText = "Œ"),
+        Inputkey(Pair(5, 1), previewText = "Ñ", inputText = "Ñ"),
+        Inputkey(Pair(5, 2), previewText = "Ø", inputText = "Ø"),
 
         // Switches
         Inputkey(Pair(1, 3), previewText = "XX", switchesToRemove = listOf("vowelsShifted")),
 
         )),
 
-    InputkeyPack("variantsOfACapital",listOf<Inputkey>(
+    InputkeyPack("variantsOfCapitalA",listOf<Inputkey>(
+        Inputkey(Pair(1, 1), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "Ā", inputText = "Ā"),
         Inputkey(Pair(6, 2), previewText = "À", inputText = "À"),
         Inputkey(Pair(6, 3), previewText = "Á", inputText = "Á"),
@@ -757,7 +791,8 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(4, 1), previewText = "Ä", inputText = "Ä"),
     )),
 
-    InputkeyPack("variantsOfECapital",listOf<Inputkey>(
+    InputkeyPack("variantsOfCapitalE",listOf<Inputkey>(
+        Inputkey(Pair(1, 2), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "Ē", inputText = "Ē"),
         Inputkey(Pair(6, 2), previewText = "È", inputText = "È"),
         Inputkey(Pair(6, 3), previewText = "É", inputText = "É"),
@@ -765,7 +800,8 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(5, 2), previewText = "Ë", inputText = "Ë"),
     )),
 
-    InputkeyPack("variantsOfICapital",listOf<Inputkey>(
+    InputkeyPack("variantsOfCapitalI",listOf<Inputkey>(
+        Inputkey(Pair(2, 1), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "Ī", inputText = "Ī"),
         Inputkey(Pair(6, 2), previewText = "Ì", inputText = "Ì"),
         Inputkey(Pair(6, 3), previewText = "Í", inputText = "Í"),
@@ -774,7 +810,8 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(5, 3), previewText = "I", inputText = "I"),
     )),
 
-    InputkeyPack("variantsOfOCapital",listOf<Inputkey>(
+    InputkeyPack("variantsOfCapitalO",listOf<Inputkey>(
+        Inputkey(Pair(2, 2), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "Ō", inputText = "Ō"),
         Inputkey(Pair(6, 2), previewText = "Ò", inputText = "Ò"),
         Inputkey(Pair(6, 3), previewText = "Ó", inputText = "Ó"),
@@ -783,7 +820,8 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(5, 3), previewText = "Ö", inputText = "Ö"),
     )),
 
-    InputkeyPack("variantsOfUCapital",listOf<Inputkey>(
+    InputkeyPack("variantsOfCapitalU",listOf<Inputkey>(
+        Inputkey(Pair(2, 3), previewText = "XX"),
         Inputkey(Pair(6, 1), previewText = "Ū", inputText = "Ū"),
         Inputkey(Pair(6, 2), previewText = "Ù", inputText = "Ù"),
         Inputkey(Pair(6, 3), previewText = "Ú", inputText = "Ú"),

@@ -7,6 +7,7 @@ import android.inputmethodservice.InputMethodService
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.util.Log
+import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -134,16 +135,34 @@ class TsplitInputMethodService : InputMethodService() {
         }
 
         if (input.actions?.contains("moveCursorHorizontally") == true) {
+            val amount = input.amount ?: 0
+            val keyCode = if (amount > 0) KeyEvent.KEYCODE_DPAD_RIGHT else KeyEvent.KEYCODE_DPAD_LEFT
+
+            repeat(kotlin.math.abs(amount).coerceAtMost(50)) {
+                ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
+                ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
+            }
+        }
+        /*if (input.actions?.contains("moveCursorHorizontally") == true) {
             val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
             val cursor = extracted.selectionStart
             val newPos = cursor + (input.amount ?: 0)
             ic.setSelection(newPos, newPos)
-        }
+        }*/
 
         if (input.actions?.contains("moveCursorVertically") == true) {
+            val lines = -(input.amount ?: 0)
+            val keyCode = if (lines > 0) KeyEvent.KEYCODE_DPAD_DOWN else KeyEvent.KEYCODE_DPAD_UP
+
+            repeat(kotlin.math.abs(lines).coerceAtMost(50)) {
+                ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
+                ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
+            }
+        }
+        /*if (input.actions?.contains("moveCursorVertically") == true) {
             val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
             val text = extracted.text?.toString() ?: return
-            val lines = input.amount ?: 0
+            val lines = -(input.amount ?: 0)
 
             if (lines != 0) {
                 val cursor = extracted.selectionStart.coerceIn(0, text.length)
@@ -181,7 +200,7 @@ class TsplitInputMethodService : InputMethodService() {
                 val newPos = extracted.startOffset + newRelative
                 ic.setSelection(newPos, newPos)
             }
-        }
+        }*/
 
         if (input.actions?.contains("moveSelectionLeft") == true) {
             val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return

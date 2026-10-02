@@ -95,6 +95,10 @@ var switchStates = listOf<SwitchState>(
     ),
     SwitchState("letters2",
         packsToAdd = listOf("letters2"),
+        packsToOmit = listOf("letters"),
+    ),
+    SwitchState("vowels",
+        packsToAdd = listOf("vowels"),
     ),
     SwitchState("variantsOfA",
         packsToAdd = listOf("variantsOfA"),
@@ -139,6 +143,9 @@ var switchStates = listOf<SwitchState>(
     SwitchState("variantsOfCapitalU",
         packsToAdd = listOf("variantsOfCapitalU"),
         packsToOmit = listOf("vowelsShifted"),
+    ),
+    SwitchState("IPA",
+        packsToAdd = listOf("IPA"),
     ),
 )
 
