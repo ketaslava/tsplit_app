@@ -46,10 +46,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 4), Pair(5, 2), previewText = "EN", actions = listOf("enter")),
         Inputkey(Pair(2, 4), Pair(5, 3), previewText = "\\N", inputText = "\n"),
         Inputkey(Pair(2, 4), Pair(5, 4), previewText = "TA", inputText = "  "),
-        Inputkey(Pair(1, 1), Pair(5, 4), previewText = "↑", circleIndicator = true),
-        Inputkey(Pair(2, 1),Pair(5, 4), previewText = "↓", circleIndicator = true),
-        Inputkey(Pair(1, 2),Pair(5, 4), previewText = "←", circleIndicator = true, gesture = "moveCursor", amount = -1),
-        Inputkey(Pair(2, 2),Pair(5, 4), previewText = "→", circleIndicator = true, gesture = "moveCursor", amount = 1),
+        Inputkey(Pair(1, 1), Pair(5, 4), previewText = "↑", circleIndicator = true, gesture = "moveCursorVertically", amount = 1),
+        Inputkey(Pair(2, 1),Pair(5, 4), previewText = "↓", circleIndicator = true, gesture = "moveCursorVertically", amount = -1),
+        Inputkey(Pair(1, 2),Pair(5, 4), previewText = "←", circleIndicator = true, gesture = "moveCursorHorizontally", amount = -1),
+        Inputkey(Pair(2, 2),Pair(5, 4), previewText = "→", circleIndicator = true, gesture = "moveCursorHorizontally", amount = 1),
 
         // Script change
 
@@ -62,8 +62,8 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(1, 4), Pair(5, 1), previewText = "КИ", isRemoveAllSwitchesFirst = true, switchesToAdd = listOf("cyrillic")),
         Inputkey(Pair(1, 4), Pair(5, 3), previewText = "?!", isRemoveAllSwitchesFirst = true, switchesToAdd = listOf("punctuation")),
 
-        //Inputkey(Pair(1, 4), Pair(6, 1), previewText = "Ø", isRemoveAllSwitchesFirst = true, switchesToAdd = listOf("vowels")),
-        //Inputkey(Pair(1, 4), Pair(6, 2), previewText = "Iː", isRemoveAllSwitchesFirst = true, switchesToAdd = listOf("IPA")),
+        Inputkey(Pair(1, 4), Pair(6, 1), previewText = "Ø", isRemoveAllSwitchesFirst = true, switchesToAdd = listOf("vowels")),
+        Inputkey(Pair(1, 4), Pair(6, 2), previewText = "Iː", isRemoveAllSwitchesFirst = true, switchesToAdd = listOf("IPA")),
 
         // Special
 
@@ -117,6 +117,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 2), Pair(6, 1), previewText = "X", inputText = "x"),
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Q", inputText = "q"),
         Inputkey(Pair(2, 2), Pair(5, 2), previewText = "K", inputText = "k"),
+        Inputkey(Pair(1, 2), Pair(6, 1), previewText = "'", inputText = "'"),
 
         )),
 
@@ -150,6 +151,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         Inputkey(Pair(1, 3), previewText = "XX", switchesToRemove = listOf("latinShifted")),
         Inputkey(Pair(6, 3), previewText = "XX", switchesToRemove = listOf("latinShifted")),
+        Inputkey(Pair(1, 3), Pair(6, 3), previewText = "SH!", switchesToAdd = listOf("latinShifted")),
 
         // Combination
 
@@ -161,6 +163,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 2), Pair(6, 1), previewText = "X", inputText = "X", squareIndicator = true),
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Q", inputText = "Q", squareIndicator = true),
         Inputkey(Pair(2, 2), Pair(5, 2), previewText = "K", inputText = "K", squareIndicator = true),
+        Inputkey(Pair(1, 2), Pair(6, 1), previewText = "'", inputText = "'"),
 
         )),
 
@@ -245,7 +248,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 3), previewText = "Ь", inputText = "Ь", squareIndicator = true),
         Inputkey(Pair(3, 3), previewText = "К", inputText = "К", squareIndicator = true),
         Inputkey(Pair(4, 3), previewText = "М", inputText = "М", squareIndicator = true),
-        Inputkey(Pair(5, 3), previewText = "D", inputText = "D", squareIndicator = true),
+        Inputkey(Pair(5, 3), previewText = "D", inputText = "Д", squareIndicator = true),
 
         Inputkey(Pair(3, 4), previewText = "Ы", inputText = "Ы", squareIndicator = true),
         Inputkey(Pair(4, 4), previewText = "П", inputText = "П", squareIndicator = true),
@@ -254,6 +257,7 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         Inputkey(Pair(1, 3), previewText = "XX", switchesToRemove = listOf("cyrillicShifted")),
         Inputkey(Pair(6, 3), previewText = "XX", switchesToRemove = listOf("cyrillicShifted")),
+        Inputkey(Pair(1, 3), Pair(6, 3), previewText = "SH!", switchesToAdd = listOf("cyrillicShifted")),
 
         // Combination
 
@@ -290,7 +294,9 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(1, 3), Pair(5, 2), previewText = "!", inputText = "!"),
         Inputkey(Pair(2, 3), Pair(5, 2), previewText = "‽", inputText = "‽"),
         Inputkey(Pair(3, 3), Pair(5, 2), previewText = "?", inputText = "?"),
+        Inputkey(Pair(4, 3), Pair(5, 2), previewText = "*", inputText = "*"),
 
+        Inputkey(Pair(2, 2), Pair(3, 3), previewText = ":", inputText = ":"),
         Inputkey(Pair(2, 2), Pair(4, 3), previewText = ",", inputText = ","),
         Inputkey(Pair(2, 2), Pair(5, 3), previewText = ".", inputText = "."),
         Inputkey(Pair(2, 2), Pair(6, 3), previewText = "—", inputText = "—"),
@@ -626,7 +632,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         // First layer
 
         Inputkey(Pair(3, 1), previewText = "ẞ", inputText = "ẞ"),
+        Inputkey(Pair(2, 2), previewText = "ß", inputText = "ß"),
+
         Inputkey(Pair(4, 1), previewText = "Ç", inputText = "Ç"),
+        Inputkey(Pair(5, 2), previewText = "ç", inputText = "ç"),
         Inputkey(Pair(5, 1), previewText = "$", inputText = "$"),
         Inputkey(Pair(6, 1), previewText = "£", inputText = "£"),
 
@@ -635,9 +644,18 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(5, 2), previewText = "¥", inputText = "¥"),
         Inputkey(Pair(6, 2), previewText = "₱", inputText = "₱"),
 
-        Inputkey(Pair(4, 3), previewText = "Ð", inputText = "Ð"),
+        Inputkey(Pair(3, 3), previewText = "Ð", inputText = "Ð"),
+        Inputkey(Pair(4, 3), previewText = "ð", inputText = "ð"),
         Inputkey(Pair(5, 3), previewText = "Þ", inputText = "Þ"),
         Inputkey(Pair(6, 3), previewText = "Ŋ", inputText = "Ŋ"),
+
+        Inputkey(Pair(1, 3), previewText = "Ω", inputText = "Ω"),
+        Inputkey(Pair(2, 3), previewText = "Π", inputText = "Π"),
+        Inputkey(Pair(3, 3), previewText = "π", inputText = "π"),
+        Inputkey(Pair(6, 3), previewText = "ŋ", inputText = "ŋ"),
+        Inputkey(Pair(3, 4), previewText = "ı", inputText = "ı"),
+        Inputkey(Pair(4, 4), previewText = "ł", inputText = "ł"),
+        Inputkey(Pair(6, 2), previewText = "μ", inputText = "μ"),
 
         )),
 
@@ -645,182 +663,165 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
     // VOWELS
     // ----------------------------------------------------------------------------------------
 
-    /*InputkeyPack("vowels",listOf<Inputkey>(
+    InputkeyPack("vowels",listOf<Inputkey>(
 
         // First layer
 
-        Inputkey(Pair(1, 1), previewText = "ā", inputText = "ā"),
-        Inputkey(Pair(2, 1), previewText = "ē", inputText = "ē"),
-        Inputkey(Pair(3, 1), previewText = "ī", inputText = "ī"),
-        Inputkey(Pair(4, 1), previewText = "ō", inputText = "ō"),
-        Inputkey(Pair(5, 1), previewText = "ū", inputText = "ū"),
-        Inputkey(Pair(6, 1), previewText = "ñ", inputText = "ñ"),
+        Inputkey(Pair(1, 1), previewText = "ā", circleIndicator = true, oneInputSwitches = listOf("variantsOfA")),
+        Inputkey(Pair(1, 2), previewText = "ē", circleIndicator = true, oneInputSwitches = listOf("variantsOfE")),
+        Inputkey(Pair(2, 1), previewText = "ī", circleIndicator = true, oneInputSwitches = listOf("variantsOfI")),
+        Inputkey(Pair(2, 2), previewText = "ō", circleIndicator = true, oneInputSwitches = listOf("variantsOfO")),
+        Inputkey(Pair(2, 3), previewText = "ū", circleIndicator = true, oneInputSwitches = listOf("variantsOfU")),
 
-        Inputkey(Pair(1, 2), previewText = "æ", inputText = "æ"),
-        Inputkey(Pair(2, 2), previewText = "ß", inputText = "ß"),
+        Inputkey(Pair(3, 1), previewText = "æ", inputText = "æ"),
         Inputkey(Pair(3, 2), previewText = "œ", inputText = "œ"),
-        Inputkey(Pair(4, 2), previewText = "ø", inputText = "ø"),
-        Inputkey(Pair(5, 2), previewText = "ç", inputText = "ç"),
-        Inputkey(Pair(6, 2), previewText = "μ", inputText = "μ"),
+        Inputkey(Pair(3, 3), previewText = "ø", inputText = "ø"),
+        Inputkey(Pair(3, 4), previewText = "ñ", inputText = "ñ"),
 
-        Inputkey(Pair(1, 3), previewText = "Ω", inputText = "Ω"),
-        Inputkey(Pair(2, 3), previewText = "Π", inputText = "Π"),
-        Inputkey(Pair(3, 3), previewText = "π", inputText = "π"),
-        Inputkey(Pair(4, 3), previewText = "ð", inputText = "ð"),
-        Inputkey(Pair(5, 3), previewText = "þ", inputText = "þ"),
-        Inputkey(Pair(6, 3), previewText = "ŋ", inputText = "ŋ"),
-
-        Inputkey(Pair(3, 4), previewText = "ı", inputText = "ı"),
-        Inputkey(Pair(4, 4), previewText = "ł", inputText = "ł"),
-
-        // Stacks (2-pointer: letter + ß) -> accent-variant lookup, one keystroke, auto-reverts
-
-        Inputkey(Pair(1, 1), Pair(2, 2), previewText = "ā", circleIndicator = true, oneInputSwitches = listOf("variantsOfA")),
-        Inputkey(Pair(2, 1), Pair(2, 2), previewText = "ē", circleIndicator = true, oneInputSwitches = listOf("variantsOfE")),
-        Inputkey(Pair(3, 1), Pair(2, 2), previewText = "ī", circleIndicator = true, oneInputSwitches = listOf("variantsOfI")),
-        Inputkey(Pair(4, 1), Pair(2, 2), previewText = "ō", circleIndicator = true, oneInputSwitches = listOf("variantsOfO")),
-        Inputkey(Pair(5, 1), Pair(2, 2), previewText = "ū", circleIndicator = true, oneInputSwitches = listOf("variantsOfU")),
-        Inputkey(Pair(1, 2), Pair(2, 2), previewText = "æ", circleIndicator = true, oneInputSwitches = listOf("variantsOfA")),
-        Inputkey(Pair(3, 2), Pair(2, 2), previewText = "œ", circleIndicator = true, oneInputSwitches = listOf("variantsOfO")),
-        Inputkey(Pair(4, 2), Pair(2, 2), previewText = "ø", circleIndicator = true, oneInputSwitches = listOf("variantsOfO")),
+        // Switches
+        Inputkey(Pair(1, 3), previewText = "SH", switchesToAdd = listOf("vowelsShifted")),
 
         )),
 
-    /*
-
-    Inputkey(Pair(1, 1), Pair(2, 2), previewText = "Ā", circleIndicator = true, oneInputSwitches = listOf("variantsOfACapital")),
-        Inputkey(Pair(2, 1), Pair(2, 2), previewText = "Ē", circleIndicator = true, oneInputSwitches = listOf("variantsOfECapital")),
-        Inputkey(Pair(3, 1), Pair(2, 2), previewText = "Ī", circleIndicator = true, oneInputSwitches = listOf("variantsOfICapital")),
-        Inputkey(Pair(4, 1), Pair(2, 2), previewText = "Ō", circleIndicator = true, oneInputSwitches = listOf("variantsOfOCapital")),
-        Inputkey(Pair(5, 1), Pair(2, 2), previewText = "Ū", circleIndicator = true, oneInputSwitches = listOf("variantsOfUCapital")),
-        Inputkey(Pair(1, 2), Pair(2, 2), previewText = "Æ", circleIndicator = true, oneInputSwitches = listOf("variantsOfACapital")),
-        Inputkey(Pair(3, 2), Pair(2, 2), previewText = "Œ", circleIndicator = true, oneInputSwitches = listOf("variantsOfOCapital")),
-        Inputkey(Pair(4, 2), Pair(2, 2), previewText = "Ø", circleIndicator = true, oneInputSwitches = listOf("variantsOfOCapital")),
-
-        Inputkey(Pair(1, 1), previewText = "Ā", inputText = "Ā"),
-        Inputkey(Pair(2, 1), previewText = "Ē", inputText = "Ē"),
-        Inputkey(Pair(3, 1), previewText = "Ī", inputText = "Ī"),
-        Inputkey(Pair(4, 1), previewText = "Ō", inputText = "Ō"),
-        Inputkey(Pair(5, 1), previewText = "Ū", inputText = "Ū"),
-        Inputkey(Pair(6, 1), previewText = "Ñ", inputText = "Ñ"),
-
-        Inputkey(Pair(1, 2), previewText = "Æ", inputText = "Æ"),
-        Inputkey(Pair(3, 2), previewText = "Œ", inputText = "Œ"),
-        Inputkey(Pair(4, 2), previewText = "Ø", inputText = "Ø"),
-
-     */
-
     InputkeyPack("variantsOfA",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "à", inputText = "à"),
-        Inputkey(Pair(2, 1), previewText = "á", inputText = "á"),
-        Inputkey(Pair(3, 1), previewText = "â", inputText = "â"),
-        Inputkey(Pair(4, 1), previewText = "ã", inputText = "ã"),
-        Inputkey(Pair(5, 1), previewText = "å", inputText = "å"),
-        Inputkey(Pair(6, 1), previewText = "ä", inputText = "ä"),
+        Inputkey(Pair(6, 1), previewText = "ā", inputText = "ā"),
+        Inputkey(Pair(6, 2), previewText = "à", inputText = "à"),
+        Inputkey(Pair(6, 3), previewText = "á", inputText = "á"),
+        Inputkey(Pair(5, 1), previewText = "â", inputText = "â"),
+        Inputkey(Pair(5, 2), previewText = "ã", inputText = "ã"),
+        Inputkey(Pair(5, 3), previewText = "å", inputText = "å"),
+        Inputkey(Pair(4, 1), previewText = "ä", inputText = "ä"),
     )),
 
     InputkeyPack("variantsOfE",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "è", inputText = "è"),
-        Inputkey(Pair(2, 1), previewText = "é", inputText = "é"),
-        Inputkey(Pair(3, 1), previewText = "ê", inputText = "ê"),
-        Inputkey(Pair(4, 1), previewText = "ë", inputText = "ë"),
+        Inputkey(Pair(6, 1), previewText = "ē", inputText = "ē"),
+        Inputkey(Pair(6, 2), previewText = "è", inputText = "è"),
+        Inputkey(Pair(6, 3), previewText = "é", inputText = "é"),
+        Inputkey(Pair(5, 1), previewText = "ê", inputText = "ê"),
+        Inputkey(Pair(5, 2), previewText = "ë", inputText = "ë"),
     )),
 
     InputkeyPack("variantsOfI",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "ì", inputText = "ì"),
-        Inputkey(Pair(2, 1), previewText = "í", inputText = "í"),
-        Inputkey(Pair(3, 1), previewText = "î", inputText = "î"),
-        Inputkey(Pair(4, 1), previewText = "ï", inputText = "ï"),
-        Inputkey(Pair(5, 1), previewText = "i", inputText = "i"),
+        Inputkey(Pair(6, 1), previewText = "ī", inputText = "ī"),
+        Inputkey(Pair(6, 2), previewText = "ì", inputText = "ì"),
+        Inputkey(Pair(6, 3), previewText = "í", inputText = "í"),
+        Inputkey(Pair(5, 1), previewText = "î", inputText = "î"),
+        Inputkey(Pair(5, 2), previewText = "ï", inputText = "ï"),
+        Inputkey(Pair(5, 3), previewText = "i", inputText = "i"),
     )),
 
     InputkeyPack("variantsOfO",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "ò", inputText = "ò"),
-        Inputkey(Pair(2, 1), previewText = "ó", inputText = "ó"),
-        Inputkey(Pair(3, 1), previewText = "ô", inputText = "ô"),
-        Inputkey(Pair(4, 1), previewText = "õ", inputText = "õ"),
-        Inputkey(Pair(5, 1), previewText = "ö", inputText = "ö"),
+        Inputkey(Pair(6, 1), previewText = "ō", inputText = "ō"),
+        Inputkey(Pair(6, 2), previewText = "ò", inputText = "ò"),
+        Inputkey(Pair(6, 3), previewText = "ó", inputText = "ó"),
+        Inputkey(Pair(5, 1), previewText = "ô", inputText = "ô"),
+        Inputkey(Pair(5, 2), previewText = "õ", inputText = "õ"),
+        Inputkey(Pair(5, 3), previewText = "ö", inputText = "ö"),
     )),
 
     InputkeyPack("variantsOfU",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "ù", inputText = "ù"),
-        Inputkey(Pair(2, 1), previewText = "ú", inputText = "ú"),
-        Inputkey(Pair(3, 1), previewText = "û", inputText = "û"),
-        Inputkey(Pair(4, 1), previewText = "ü", inputText = "ü"),
+        Inputkey(Pair(6, 1), previewText = "ū", inputText = "ū"),
+        Inputkey(Pair(6, 2), previewText = "ù", inputText = "ù"),
+        Inputkey(Pair(6, 3), previewText = "ú", inputText = "ú"),
+        Inputkey(Pair(5, 1), previewText = "û", inputText = "û"),
+        Inputkey(Pair(5, 2), previewText = "ü", inputText = "ü"),
     )),
 
+    InputkeyPack("vowelsShifted",listOf<Inputkey>(
+
+        // First layer
+
+        Inputkey(Pair(1, 1), previewText = "Ā", circleIndicator = true, oneInputSwitches = listOf("variantsOfCapitalA")),
+        Inputkey(Pair(1, 2), previewText = "Ē", circleIndicator = true, oneInputSwitches = listOf("variantsOfCapitalE")),
+        Inputkey(Pair(2, 1), previewText = "Ī", circleIndicator = true, oneInputSwitches = listOf("variantsOfCapitalI")),
+        Inputkey(Pair(2, 2), previewText = "Ō", circleIndicator = true, oneInputSwitches = listOf("variantsOfCapitalO")),
+        Inputkey(Pair(2, 3), previewText = "Ū", circleIndicator = true, oneInputSwitches = listOf("variantsOfCapitalU")),
+
+        Inputkey(Pair(3, 1), previewText = "Æ", inputText = "Æ"),
+        Inputkey(Pair(3, 2), previewText = "Œ", inputText = "Œ"),
+        Inputkey(Pair(3, 3), previewText = "Ø", inputText = "Ø"),
+        Inputkey(Pair(3, 4), previewText = "Ñ", inputText = "Ñ"),
+
+        // Switches
+        Inputkey(Pair(1, 3), previewText = "XX", switchesToRemove = listOf("vowelsShifted")),
+
+        )),
+
     InputkeyPack("variantsOfACapital",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "À", inputText = "À"),
-        Inputkey(Pair(2, 1), previewText = "Á", inputText = "Á"),
-        Inputkey(Pair(3, 1), previewText = "Â", inputText = "Â"),
-        Inputkey(Pair(4, 1), previewText = "Ã", inputText = "Ã"),
-        Inputkey(Pair(5, 1), previewText = "Å", inputText = "Å"),
-        Inputkey(Pair(6, 1), previewText = "Ä", inputText = "Ä"),
+        Inputkey(Pair(6, 1), previewText = "Ā", inputText = "Ā"),
+        Inputkey(Pair(6, 2), previewText = "À", inputText = "À"),
+        Inputkey(Pair(6, 3), previewText = "Á", inputText = "Á"),
+        Inputkey(Pair(5, 1), previewText = "Â", inputText = "Â"),
+        Inputkey(Pair(5, 2), previewText = "Ã", inputText = "Ã"),
+        Inputkey(Pair(5, 3), previewText = "Å", inputText = "Å"),
+        Inputkey(Pair(4, 1), previewText = "Ä", inputText = "Ä"),
     )),
 
     InputkeyPack("variantsOfECapital",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "È", inputText = "È"),
-        Inputkey(Pair(2, 1), previewText = "É", inputText = "É"),
-        Inputkey(Pair(3, 1), previewText = "Ê", inputText = "Ê"),
-        Inputkey(Pair(4, 1), previewText = "Ë", inputText = "Ë"),
+        Inputkey(Pair(6, 1), previewText = "Ē", inputText = "Ē"),
+        Inputkey(Pair(6, 2), previewText = "È", inputText = "È"),
+        Inputkey(Pair(6, 3), previewText = "É", inputText = "É"),
+        Inputkey(Pair(5, 1), previewText = "Ê", inputText = "Ê"),
+        Inputkey(Pair(5, 2), previewText = "Ë", inputText = "Ë"),
     )),
 
     InputkeyPack("variantsOfICapital",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "Ì", inputText = "Ì"),
-        Inputkey(Pair(2, 1), previewText = "Í", inputText = "Í"),
-        Inputkey(Pair(3, 1), previewText = "Î", inputText = "Î"),
-        Inputkey(Pair(4, 1), previewText = "Ï", inputText = "Ï"),
-        Inputkey(Pair(5, 1), previewText = "I", inputText = "I"),
+        Inputkey(Pair(6, 1), previewText = "Ī", inputText = "Ī"),
+        Inputkey(Pair(6, 2), previewText = "Ì", inputText = "Ì"),
+        Inputkey(Pair(6, 3), previewText = "Í", inputText = "Í"),
+        Inputkey(Pair(5, 1), previewText = "Î", inputText = "Î"),
+        Inputkey(Pair(5, 2), previewText = "Ï", inputText = "Ï"),
+        Inputkey(Pair(5, 3), previewText = "I", inputText = "I"),
     )),
 
     InputkeyPack("variantsOfOCapital",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "Ò", inputText = "Ò"),
-        Inputkey(Pair(2, 1), previewText = "Ó", inputText = "Ó"),
-        Inputkey(Pair(3, 1), previewText = "Ô", inputText = "Ô"),
-        Inputkey(Pair(4, 1), previewText = "Õ", inputText = "Õ"),
-        Inputkey(Pair(5, 1), previewText = "Ö", inputText = "Ö"),
+        Inputkey(Pair(6, 1), previewText = "Ō", inputText = "Ō"),
+        Inputkey(Pair(6, 2), previewText = "Ò", inputText = "Ò"),
+        Inputkey(Pair(6, 3), previewText = "Ó", inputText = "Ó"),
+        Inputkey(Pair(5, 1), previewText = "Ô", inputText = "Ô"),
+        Inputkey(Pair(5, 2), previewText = "Õ", inputText = "Õ"),
+        Inputkey(Pair(5, 3), previewText = "Ö", inputText = "Ö"),
     )),
 
     InputkeyPack("variantsOfUCapital",listOf<Inputkey>(
-        Inputkey(Pair(1, 1), previewText = "Ù", inputText = "Ù"),
-        Inputkey(Pair(2, 1), previewText = "Ú", inputText = "Ú"),
-        Inputkey(Pair(3, 1), previewText = "Û", inputText = "Û"),
-        Inputkey(Pair(4, 1), previewText = "Ü", inputText = "Ü"),
+        Inputkey(Pair(6, 1), previewText = "Ū", inputText = "Ū"),
+        Inputkey(Pair(6, 2), previewText = "Ù", inputText = "Ù"),
+        Inputkey(Pair(6, 3), previewText = "Ú", inputText = "Ú"),
+        Inputkey(Pair(5, 1), previewText = "Û", inputText = "Û"),
+        Inputkey(Pair(5, 2), previewText = "Ü", inputText = "Ü"),
     )),
 
     // ----------------------------------------------------------------------------------------
-    // IPA
+    // IPA — International Phonetic Alphabet symbols
     // ----------------------------------------------------------------------------------------
 
     InputkeyPack("IPA",listOf<Inputkey>(
 
-        // First layer
+        Inputkey(Pair(1, 1), previewText = "ʃ", inputText = "ʃ"),
+        Inputkey(Pair(2, 1), previewText = "ʒ", inputText = "ʒ"),
+        Inputkey(Pair(3, 1), previewText = "θ", inputText = "θ"),
+        Inputkey(Pair(4, 1), previewText = "ð", inputText = "ð"),
+        Inputkey(Pair(5, 1), previewText = "ŋ", inputText = "ŋ"),
+        Inputkey(Pair(6, 1), previewText = "ʔ", inputText = "ʔ"),
 
-        Inputkey(Pair(1, 1), previewText = "", inputText = ""),
-        Inputkey(Pair(2, 1), previewText = "", inputText = ""),
-        Inputkey(Pair(3, 1), previewText = "", inputText = ""),
-        Inputkey(Pair(4, 1), previewText = "", inputText = ""),
-        Inputkey(Pair(5, 1), previewText = "", inputText = ""),
-        Inputkey(Pair(6, 1), previewText = "", inputText = ""),
+        Inputkey(Pair(1, 2), previewText = "ə", inputText = "ə"),
+        Inputkey(Pair(2, 2), previewText = "ɛ", inputText = "ɛ"),
+        Inputkey(Pair(3, 2), previewText = "ɪ", inputText = "ɪ"),
+        Inputkey(Pair(4, 2), previewText = "ʊ", inputText = "ʊ"),
+        Inputkey(Pair(5, 2), previewText = "ɔ", inputText = "ɔ"),
+        Inputkey(Pair(6, 2), previewText = "ɑ", inputText = "ɑ"),
 
-        Inputkey(Pair(1, 2), previewText = "", inputText = ""),
-        Inputkey(Pair(2, 2), previewText = "", inputText = ""),
-        Inputkey(Pair(3, 2), previewText = "", inputText = ""),
-        Inputkey(Pair(4, 2), previewText = "", inputText = ""),
-        Inputkey(Pair(5, 2), previewText = "", inputText = ""),
-        Inputkey(Pair(6, 2), previewText = "", inputText = ""),
+        Inputkey(Pair(1, 3), previewText = "ʌ", inputText = "ʌ"),
+        Inputkey(Pair(2, 3), previewText = "ɜ", inputText = "ɜ"),
+        Inputkey(Pair(3, 3), previewText = "ː", inputText = "ː"),
+        Inputkey(Pair(4, 3), previewText = "ˈ", inputText = "ˈ"),
+        Inputkey(Pair(5, 3), previewText = "ˌ", inputText = "ˌ"),
+        Inputkey(Pair(6, 3), previewText = "ɲ", inputText = "ɲ"),
 
-        Inputkey(Pair(1, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(2, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(3, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(4, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(5, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(6, 3), previewText = "", inputText = ""),
+        Inputkey(Pair(3, 4), previewText = "ɾ", inputText = "ɾ"),
+        Inputkey(Pair(4, 4), previewText = "ʁ", inputText = "ʁ"),
 
-        Inputkey(Pair(3, 4), previewText = "", inputText = ""),
-        Inputkey(Pair(4, 4), previewText = "", inputText = ""),
-
-        )),*/
+        )),
 
     // Spare empty template
 

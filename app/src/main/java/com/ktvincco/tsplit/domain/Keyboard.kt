@@ -96,6 +96,50 @@ var switchStates = listOf<SwitchState>(
     SwitchState("letters2",
         packsToAdd = listOf("letters2"),
     ),
+    SwitchState("variantsOfA",
+        packsToAdd = listOf("variantsOfA"),
+        packsToOmit = listOf("vowels"),
+    ),
+    SwitchState("variantsOfE",
+        packsToAdd = listOf("variantsOfE"),
+        packsToOmit = listOf("vowels"),
+    ),
+    SwitchState("variantsOfI",
+        packsToAdd = listOf("variantsOfI"),
+        packsToOmit = listOf("vowels"),
+    ),
+    SwitchState("variantsOfO",
+        packsToAdd = listOf("variantsOfO"),
+        packsToOmit = listOf("vowels"),
+    ),
+    SwitchState("variantsOfU",
+        packsToAdd = listOf("variantsOfU"),
+        packsToOmit = listOf("vowels"),
+    ),
+    SwitchState("vowelsShifted",
+        packsToAdd = listOf("vowelsShifted"),
+        packsToOmit = listOf("vowels"),
+    ),
+    SwitchState("variantsOfCapitalA",
+        packsToAdd = listOf("variantsOfCapitalA"),
+        packsToOmit = listOf("vowelsShifted"),
+    ),
+    SwitchState("variantsOfCapitalE",
+        packsToAdd = listOf("variantsOfCapitalE"),
+        packsToOmit = listOf("vowelsShifted"),
+    ),
+    SwitchState("variantsOfCapitalI",
+        packsToAdd = listOf("variantsOfCapitalI"),
+        packsToOmit = listOf("vowelsShifted"),
+    ),
+    SwitchState("variantsOfCapitalO",
+        packsToAdd = listOf("variantsOfCapitalO"),
+        packsToOmit = listOf("vowelsShifted"),
+    ),
+    SwitchState("variantsOfCapitalU",
+        packsToAdd = listOf("variantsOfCapitalU"),
+        packsToOmit = listOf("vowelsShifted"),
+    ),
 )
 
 
@@ -486,23 +530,38 @@ class Keyboard (private val stack: Stack,
             emitInputCall(KeyboardInput(actions = listOf("deleteSelection")))
         }
 
-        // Move cursor
-        if (inputState.isInGesture && currentGestureName == "moveCursor") {
+        // Move cursor horizontally
+        if (inputState.isInGesture && currentGestureName == "moveCursorHorizontally") {
             val gestureSteps = gestureDistanceToSteps(surface, gestureDistance - minDistance, 24F, minDistance)
             val unprocessedSteps = gestureSteps - currentGestureStepsDone
-
             if (unprocessedSteps != 0) {
 
                 emitInputCall(
                     KeyboardInput(
-                        actions = listOf("moveCursor"),
+                        actions = listOf("moveCursorHorizontally"),
                         amount = gestureStartInputkey.amount?.times(unprocessedSteps) ?: 1
                     )
                 )
             }
-
             currentGestureStepsDone = gestureSteps
         }
+
+        // Move cursor vertically
+        if (inputState.isInGesture && currentGestureName == "moveCursorVertically") {
+            val gestureSteps = gestureDistanceToSteps(surface, gestureDistance - minDistance, 24F, minDistance)
+            val unprocessedSteps = gestureSteps - currentGestureStepsDone
+            if (unprocessedSteps != 0) {
+
+                emitInputCall(
+                    KeyboardInput(
+                        actions = listOf("moveCursorVertically"),
+                        amount = gestureStartInputkey.amount?.times(unprocessedSteps) ?: 1
+                    )
+                )
+            }
+            currentGestureStepsDone = gestureSteps
+        }
+
 
         // Set state
         lastIsInGesture = inputState.isInGesture

@@ -133,11 +133,54 @@ class TsplitInputMethodService : InputMethodService() {
             }
         }
 
-        if (input.actions?.contains("moveCursor") == true) {
+        if (input.actions?.contains("moveCursorHorizontally") == true) {
             val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
             val cursor = extracted.selectionStart
             val newPos = cursor + (input.amount ?: 0)
             ic.setSelection(newPos, newPos)
+        }
+
+        if (input.actions?.contains("moveCursorVertically") == true) {
+            val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
+            val text = extracted.text?.toString() ?: return
+            val lines = input.amount ?: 0
+
+            if (lines != 0) {
+                val cursor = extracted.selectionStart.coerceIn(0, text.length)
+
+                // Column of the cursor within its current line
+                var lineStart = text.lastIndexOf('\n', cursor - 1) + 1
+                val column = cursor - lineStart
+
+                var hitTop = false
+                var hitBottom = false
+
+                if (lines > 0) {
+                    repeat(lines) {
+                        if (hitBottom) return@repeat
+                        val nextNewline = text.indexOf('\n', lineStart)
+                        if (nextNewline == -1) hitBottom = true else lineStart = nextNewline + 1
+                    }
+                } else {
+                    repeat(-lines) {
+                        if (hitTop) return@repeat
+                        if (lineStart == 0) hitTop = true
+                        else lineStart = text.lastIndexOf('\n', lineStart - 2) + 1
+                    }
+                }
+
+                val newRelative = when {
+                    hitBottom -> text.length
+                    hitTop -> 0
+                    else -> {
+                        val lineEnd = text.indexOf('\n', lineStart).let { if (it == -1) text.length else it }
+                        lineStart + column.coerceAtMost(lineEnd - lineStart)
+                    }
+                }
+
+                val newPos = extracted.startOffset + newRelative
+                ic.setSelection(newPos, newPos)
+            }
         }
 
         if (input.actions?.contains("moveSelectionLeft") == true) {
