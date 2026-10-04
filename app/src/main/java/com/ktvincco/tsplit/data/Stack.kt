@@ -109,10 +109,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         // Combination
 
-        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "V", inputText = "v"),
+        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "B", inputText = "b"),
         Inputkey(Pair(1, 1), Pair(6, 1), previewText = "J", inputText = "j"),
         Inputkey(Pair(1, 2), Pair(6, 2), previewText = "Z", inputText = "z"),
-        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "B", inputText = "b"),
+        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "V", inputText = "v"),
         Inputkey(Pair(2, 1), Pair(5, 1), previewText = "P", inputText = "p"),
         Inputkey(Pair(2, 2), Pair(6, 1), previewText = "X", inputText = "x"),
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Q", inputText = "q"),
@@ -156,10 +156,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         // Combination
 
-        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "V", inputText = "V", squareIndicator = true),
+        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "B", inputText = "B", squareIndicator = true),
         Inputkey(Pair(1, 1), Pair(6, 1), previewText = "J", inputText = "J", squareIndicator = true),
         Inputkey(Pair(1, 2), Pair(6, 2), previewText = "Z", inputText = "Z", squareIndicator = true),
-        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "B", inputText = "B", squareIndicator = true),
+        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "V", inputText = "V", squareIndicator = true),
         Inputkey(Pair(2, 1), Pair(5, 1), previewText = "P", inputText = "P", squareIndicator = true),
         Inputkey(Pair(2, 2), Pair(6, 1), previewText = "X", inputText = "X", squareIndicator = true),
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Q", inputText = "Q", squareIndicator = true),
@@ -207,10 +207,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         // Combination
 
-        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "Ж", inputText = "ж"),
+        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "Б", inputText = "б"),
         Inputkey(Pair(1, 1), Pair(6, 1), previewText = "Й", inputText = "й"),
         Inputkey(Pair(1, 2), Pair(6, 2), previewText = "З", inputText = "з"),
-        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "Б", inputText = "б"),
+        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "Ж", inputText = "ж"),
         Inputkey(Pair(2, 1), Pair(5, 1), previewText = "Ч", inputText = "ч"),
         Inputkey(Pair(2, 2), Pair(6, 1), previewText = "Х", inputText = "х"),
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Ю", inputText = "ю"),
@@ -263,10 +263,10 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         // Combination
 
-        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "Ж", inputText = "Ж", squareIndicator = true),
+        Inputkey(Pair(2, 2), Pair(5, 1), previewText = "Б", inputText = "Б", squareIndicator = true),
         Inputkey(Pair(1, 1), Pair(6, 1), previewText = "Й", inputText = "Й", squareIndicator = true),
         Inputkey(Pair(1, 2), Pair(6, 2), previewText = "З", inputText = "З", squareIndicator = true),
-        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "Б", inputText = "Б", squareIndicator = true),
+        Inputkey(Pair(2, 1), Pair(5, 2), previewText = "Ж", inputText = "Ж", squareIndicator = true),
         Inputkey(Pair(2, 1), Pair(5, 1), previewText = "Ч", inputText = "Ч", squareIndicator = true),
         Inputkey(Pair(2, 2), Pair(6, 1), previewText = "Х", inputText = "Х", squareIndicator = true),
         Inputkey(Pair(1, 1), Pair(5, 2), previewText = "Ю", inputText = "Ю", squareIndicator = true),
