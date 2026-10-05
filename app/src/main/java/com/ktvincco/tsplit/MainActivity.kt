@@ -28,6 +28,8 @@ import com.ktvincco.tsplit.data.Surface2D
 import com.ktvincco.tsplit.data.surface2DToAndroidBitmap
 import com.ktvincco.tsplit.domain.KeyboardInput
 import com.ktvincco.tsplit.domain.KeyboardService
+import android.widget.TextView
+import android.widget.EditText
 
 
 class MainActivity : ComponentActivity() {
@@ -70,6 +72,9 @@ class MainActivity : ComponentActivity() {
         }
         updateBottomLine()
 
+        // Keyboard height
+        setupKeyboardHeightControls()
+
         // Assign callbacks to the buttons
         assignButtonCallbacks()
 
@@ -96,6 +101,34 @@ class MainActivity : ComponentActivity() {
         }
 
         bottomLine?.requestLayout()
+    }
+
+
+    fun setupKeyboardHeightControls() {
+        val view = keyboardView ?: return
+        val input = view.findViewById<EditText>(R.id.keyboardHeightInput)
+        val setButton = view.findViewById<Button>(R.id.setKeyboardHeightButton)
+        val minusButton = view.findViewById<Button>(R.id.minusKeyboardHeightButton)
+        val plusButton = view.findViewById<Button>(R.id.plusKeyboardHeightButton)
+        val step = 5
+
+        // Show the saved value and apply it to the test surface
+        input.setText(KeyboardSettings.getHeightDp(this).toString())
+        KeyboardSettings.applyHeight(this, view.findViewById(R.id.imageView1))
+
+        fun commit(dp: Int) {
+            val saved = KeyboardSettings.setHeightDp(this, dp)
+            input.setText(saved.toString())
+            input.setSelection(input.text?.length ?: 0)
+            KeyboardSettings.applyHeight(this, view.findViewById(R.id.imageView1))
+        }
+
+        fun currentInput(): Int =
+            input.text?.toString()?.trim()?.toIntOrNull() ?: KeyboardSettings.getHeightDp(this)
+
+        setButton.setOnClickListener { commit(currentInput()) }
+        minusButton.setOnClickListener { commit(currentInput() - step) }
+        plusButton.setOnClickListener { commit(currentInput() + step) }
     }
 
 
@@ -128,6 +161,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         keyboardImageView = keyboardView?.findViewById<ImageView>(R.id.imageView1)
+        KeyboardSettings.applyHeight(this, keyboardImageView)
         assignListeners()
         Log.i("MyKeyboardService", "ON UI " + "${keyboardImageView!!.width}")
         keyboardService = KeyboardService(

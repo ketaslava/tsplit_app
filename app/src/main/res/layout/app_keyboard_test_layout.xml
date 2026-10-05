@@ -25,35 +25,103 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/open_input_settings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Open input settings"
-        app:layout_constraintBottom_toTopOf="@+id/select_input_method"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/select_input_method"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Select Input Method"
-        app:layout_constraintBottom_toTopOf="@+id/imageView1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <Switch
         android:id="@+id/bottomLineSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checked="true"
-        android:text="Enable Bottom Line"
-        app:layout_constraintBottom_toTopOf="@+id/imageView1"
+        android:text="Enable Bottom Line  "
+        app:layout_constraintBottom_toTopOf="@+id/textInputTest"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_input_method" />
+        app:layout_constraintTop_toBottomOf="@+id/setKeyboardHeightButton"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/textInputTest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="hint"
+        app:layout_constraintBottom_toTopOf="@+id/imageView1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/select_input_method"
+        android:layout_width="202dp"
+        android:layout_height="46dp"
+        android:text="Select Input Method"
+        app:layout_constraintBottom_toTopOf="@+id/keyboardHeightInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/open_input_settings"
+        android:layout_width="202dp"
+        android:layout_height="48dp"
+        android:text="Open input settings"
+        app:layout_constraintBottom_toTopOf="@+id/select_input_method"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/keyboardHeightInput"
+        android:layout_width="202dp"
+        android:layout_height="48dp"
+        android:hint="Keyboard Height"
+        android:inputType="number"
+        android:text="300"
+        app:layout_constraintBottom_toTopOf="@+id/textInputTest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/setKeyboardHeightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="Set"
+        app:layout_constraintBottom_toTopOf="@+id/textInputTest"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyboardHeightInput"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/minusKeyboardHeightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="-"
+        app:layout_constraintBottom_toBottomOf="@+id/setKeyboardHeightButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/setKeyboardHeightButton"
+        app:layout_constraintTop_toBottomOf="@+id/keyboardHeightInput" />
+
+    <Button
+        android:id="@+id/plusKeyboardHeightButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="+"
+        app:layout_constraintBottom_toBottomOf="@+id/setKeyboardHeightButton"
+        app:layout_constraintEnd_toStartOf="@+id/setKeyboardHeightButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/keyboardHeightInput" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="H (dp)  "
+        app:layout_constraintBottom_toBottomOf="@+id/keyboardHeightInput"
+        app:layout_constraintEnd_toStartOf="@+id/keyboardHeightInput"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomLineSwitch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

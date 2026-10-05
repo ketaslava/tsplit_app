@@ -52,6 +52,11 @@ class TsplitInputMethodService : InputMethodService() {
             layoutInflater.inflate(R.layout.keyboard_layout, null)
         }
 
+        // Keyboard height
+        KeyboardSettings.applyHeight(
+            this, keyboardView?.findViewById(R.id.imageView1)
+        )
+
         // Sound
         initializeSoundPlayer()
 
@@ -263,6 +268,7 @@ class TsplitInputMethodService : InputMethodService() {
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         keyboardImageView = keyboardView?.findViewById<ImageView>(R.id.imageView1)
+        KeyboardSettings.applyHeight(this, keyboardImageView)
         assignListeners()
         if (keyboardService == null) {
             keyboardService = KeyboardService(
