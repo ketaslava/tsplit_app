@@ -3,39 +3,35 @@ package com.ktvincco.tsplit
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.SoundPool
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.Switch
 import androidx.activity.ComponentActivity
 import androidx.activity.enableEdgeToEdge
 import com.ktvincco.tsplit.data.AndroidDatabase
 import com.ktvincco.tsplit.data.AndroidEnvironmentConnector
 import com.ktvincco.tsplit.data.AndroidLogger
 import com.ktvincco.tsplit.data.AndroidPermissionController
-import android.widget.ImageView
-import kotlin.collections.mutableListOf
-import android.media.AudioAttributes
-import android.media.SoundPool
-import android.provider.Settings
-import android.view.inputmethod.InputMethodManager
-import android.widget.Button
-import android.widget.Switch
-import java.io.IOException
-import kotlin.collections.set
-import androidx.core.content.edit
 import com.ktvincco.tsplit.data.Surface2D
 import com.ktvincco.tsplit.data.surface2DToAndroidBitmap
 import com.ktvincco.tsplit.domain.KeyboardInput
 import com.ktvincco.tsplit.domain.KeyboardService
-import android.widget.TextView
-import android.widget.EditText
+import java.io.IOException
 
 
 class MainActivity : ComponentActivity() {
 
-    private val PREFS_NAME = "keyboard_prefs"
-    private val KEY_BOTTOM_LINE_ENABLED = "bottom_line_enabled"
+    // Step used by the "-" and "+" buttons (dp)
+    private val STEP_DP = 10
 
     // Create platform components
     private val androidLogger = AndroidLogger()
@@ -46,7 +42,6 @@ class MainActivity : ComponentActivity() {
 
     var keyboardView: View? = null
     var keyboardImageView: ImageView? = null
-    var bottomLineSwitch: Switch? = null
 
     // Sound
     private var soundPool: SoundPool? = null
@@ -59,21 +54,32 @@ class MainActivity : ComponentActivity() {
         // Create view
         keyboardView = layoutInflater.inflate(R.layout.app_keyboard_test_layout, null)
 
-        // Bottom line switching
-        bottomLineSwitch = keyboardView?.findViewById(R.id.bottomLineSwitch)
-        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        val isBottomLineEnabled = prefs.getBoolean(KEY_BOTTOM_LINE_ENABLED, true)
-        bottomLineSwitch?.isChecked = isBottomLineEnabled
-        bottomLineSwitch?.setOnCheckedChangeListener { _, isChecked ->
-            prefs.edit {
-                putBoolean(KEY_BOTTOM_LINE_ENABLED, isChecked)
-            }
-            updateBottomLine()
-        }
-        updateBottomLine()
+        // Settings controls
+        setupBottomLineSwitch()
+        bindDpControl(
+            Setting.BOTTOM_LINE_HEIGHT,
+            R.id.bottomLineHeightInput,
+            R.id.minusBottomLineButton,
+            R.id.plusBottomLineButton,
+            R.id.setBottomLineButton
+        )
+        bindDpControl(
+            Setting.PORTRAIT_HEIGHT,
+            R.id.keyboardHeightInput,
+            R.id.minusKeyboardHeightButton,
+            R.id.plusKeyboardHeightButton,
+            R.id.setKeyboardHeightButton
+        )
+        bindDpControl(
+            Setting.LANDSCAPE_HEIGHT,
+            R.id.keyboardHeightLandscapeInput,
+            R.id.minusKeyboardHeightLandscapeButton,
+            R.id.plusKeyboardHeightLandscapeButton,
+            R.id.setKeyboardHeightLandscapeButton
+        )
 
-        // Keyboard height
-        setupKeyboardHeightControls()
+        // Apply saved sizes to the dummy keyboard
+        KeyboardSettings.applyToKeyboardView(this, keyboardView)
 
         // Assign callbacks to the buttons
         assignButtonCallbacks()
@@ -86,49 +92,48 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    fun updateBottomLine() {
-        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        val isEnabled = prefs.getBoolean(KEY_BOTTOM_LINE_ENABLED, true)
-
-        val displayMetrics = resources.displayMetrics
-        val screenHeight = displayMetrics.heightPixels
-        val panelHeight = (screenHeight * 0.052f).toInt()
-
-        val bottomLine = keyboardView?.findViewById<ImageView>(R.id.bottomLine)
-
-        bottomLine?.layoutParams = bottomLine.layoutParams?.apply {
-            height = if (isEnabled) panelHeight else 0
+    private fun setupBottomLineSwitch() {
+        val bottomLineSwitch = keyboardView?.findViewById<Switch>(R.id.bottomLineSwitch)
+        bottomLineSwitch?.isChecked = KeyboardSettings.isBottomLineEnabled(this)
+        bottomLineSwitch?.setOnCheckedChangeListener { _, isChecked ->
+            KeyboardSettings.setBottomLineEnabled(this, isChecked)
+            KeyboardSettings.applyToKeyboardView(this, keyboardView)
         }
-
-        bottomLine?.requestLayout()
     }
 
 
-    fun setupKeyboardHeightControls() {
-        val view = keyboardView ?: return
-        val input = view.findViewById<EditText>(R.id.keyboardHeightInput)
-        val setButton = view.findViewById<Button>(R.id.setKeyboardHeightButton)
-        val minusButton = view.findViewById<Button>(R.id.minusKeyboardHeightButton)
-        val plusButton = view.findViewById<Button>(R.id.plusKeyboardHeightButton)
-        val step = 5
+    /** Connects one "input + minus + plus + set" row to a setting. */
+    private fun bindDpControl(
+        setting: Setting, inputId: Int, minusId: Int, plusId: Int, setId: Int
+    ) {
+        val root = keyboardView ?: return
+        val input = root.findViewById<EditText>(inputId)
 
-        // Show the saved value and apply it to the test surface
-        input.setText(KeyboardSettings.getHeightDp(this).toString())
-        KeyboardSettings.applyHeight(this, view.findViewById(R.id.imageView1))
+        input.setText(KeyboardSettings.get(this, setting).toString())
 
-        fun commit(dp: Int) {
-            val saved = KeyboardSettings.setHeightDp(this, dp)
-            input.setText(saved.toString())
-            input.setSelection(input.text?.length ?: 0)
-            KeyboardSettings.applyHeight(this, view.findViewById(R.id.imageView1))
+        root.findViewById<Button>(setId).setOnClickListener {
+            saveValue(setting, input, readInput(setting, input))
         }
+        root.findViewById<Button>(minusId).setOnClickListener {
+            saveValue(setting, input, readInput(setting, input) - STEP_DP)
+        }
+        root.findViewById<Button>(plusId).setOnClickListener {
+            saveValue(setting, input, readInput(setting, input) + STEP_DP)
+        }
+    }
 
-        fun currentInput(): Int =
-            input.text?.toString()?.trim()?.toIntOrNull() ?: KeyboardSettings.getHeightDp(this)
 
-        setButton.setOnClickListener { commit(currentInput()) }
-        minusButton.setOnClickListener { commit(currentInput() - step) }
-        plusButton.setOnClickListener { commit(currentInput() + step) }
+    /** Valid value from the field, otherwise the default (300 for heights). */
+    private fun readInput(setting: Setting, input: EditText): Int {
+        return KeyboardSettings.parse(setting, input.text?.toString())
+    }
+
+
+    private fun saveValue(setting: Setting, input: EditText, dp: Int) {
+        val saved = KeyboardSettings.set(this, setting, dp)
+        input.setText(saved.toString())
+        input.setSelection(input.text?.length ?: 0)
+        KeyboardSettings.applyToKeyboardView(this, keyboardView)
     }
 
 
@@ -161,7 +166,7 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         keyboardImageView = keyboardView?.findViewById<ImageView>(R.id.imageView1)
-        KeyboardSettings.applyHeight(this, keyboardImageView)
+        KeyboardSettings.applyToKeyboardView(this, keyboardView)
         assignListeners()
         Log.i("MyKeyboardService", "ON UI " + "${keyboardImageView!!.width}")
         keyboardService = KeyboardService(

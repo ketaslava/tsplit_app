@@ -2,7 +2,6 @@ package com.ktvincco.tsplit
 
 
 import android.annotation.SuppressLint
-import android.content.res.Configuration
 import android.inputmethodservice.InputMethodService
 import android.media.AudioAttributes
 import android.media.SoundPool
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.ExtractedTextRequest
 import android.widget.ImageView
+import android.content.res.Configuration
 import com.ktvincco.tsplit.data.AndroidDatabase
 import com.ktvincco.tsplit.data.AndroidEnvironmentConnector
 import com.ktvincco.tsplit.data.AndroidLogger
@@ -25,9 +25,6 @@ import java.io.IOException
 
 
 class TsplitInputMethodService : InputMethodService() {
-
-    private val PREFS_NAME = "keyboard_prefs"
-    private val KEY_BOTTOM_LINE_ENABLED = "bottom_line_enabled"
 
     private val androidLogger = AndroidLogger()
     private val permissionController = AndroidPermissionController(null)
@@ -52,10 +49,8 @@ class TsplitInputMethodService : InputMethodService() {
             layoutInflater.inflate(R.layout.keyboard_layout, null)
         }
 
-        // Keyboard height
-        KeyboardSettings.applyHeight(
-            this, keyboardView?.findViewById(R.id.imageView1)
-        )
+        // Apply saved keyboard height and bottom line height
+        KeyboardSettings.applyToKeyboardView(this, keyboardView)
 
         // Sound
         initializeSoundPlayer()
@@ -65,24 +60,6 @@ class TsplitInputMethodService : InputMethodService() {
 
         // Return view
         return keyboardView!!
-    }
-
-
-    fun updateBottomLine() {
-        val prefs = getSharedPreferences(PREFS_NAME, MODE_PRIVATE)
-        val isEnabled = prefs.getBoolean(KEY_BOTTOM_LINE_ENABLED, true)
-
-        val displayMetrics = resources.displayMetrics
-        val screenHeight = displayMetrics.heightPixels
-        val panelHeight = (screenHeight * 0.052f).toInt()
-
-        val bottomLine = keyboardView?.findViewById<ImageView>(R.id.bottomLine)
-
-        bottomLine?.layoutParams = bottomLine.layoutParams?.apply {
-            height = if (isEnabled) panelHeight else 0
-        }
-
-        bottomLine?.requestLayout()
     }
 
 
@@ -122,7 +99,6 @@ class TsplitInputMethodService : InputMethodService() {
         }
 
         // Actions
-        //androidLogger.log("AAA", "ACTIONS: ${input.actions}")
 
         if (input.actions?.contains("deleteCharacterFromTheLeft") == true) {
             ic.deleteSurroundingText(1, 0)
@@ -148,12 +124,6 @@ class TsplitInputMethodService : InputMethodService() {
                 ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
             }
         }
-        /*if (input.actions?.contains("moveCursorHorizontally") == true) {
-            val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
-            val cursor = extracted.selectionStart
-            val newPos = cursor + (input.amount ?: 0)
-            ic.setSelection(newPos, newPos)
-        }*/
 
         if (input.actions?.contains("moveCursorVertically") == true) {
             val lines = -(input.amount ?: 0)
@@ -164,48 +134,6 @@ class TsplitInputMethodService : InputMethodService() {
                 ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
             }
         }
-        /*if (input.actions?.contains("moveCursorVertically") == true) {
-            val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
-            val text = extracted.text?.toString() ?: return
-            val lines = -(input.amount ?: 0)
-
-            if (lines != 0) {
-                val cursor = extracted.selectionStart.coerceIn(0, text.length)
-
-                // Column of the cursor within its current line
-                var lineStart = text.lastIndexOf('\n', cursor - 1) + 1
-                val column = cursor - lineStart
-
-                var hitTop = false
-                var hitBottom = false
-
-                if (lines > 0) {
-                    repeat(lines) {
-                        if (hitBottom) return@repeat
-                        val nextNewline = text.indexOf('\n', lineStart)
-                        if (nextNewline == -1) hitBottom = true else lineStart = nextNewline + 1
-                    }
-                } else {
-                    repeat(-lines) {
-                        if (hitTop) return@repeat
-                        if (lineStart == 0) hitTop = true
-                        else lineStart = text.lastIndexOf('\n', lineStart - 2) + 1
-                    }
-                }
-
-                val newRelative = when {
-                    hitBottom -> text.length
-                    hitTop -> 0
-                    else -> {
-                        val lineEnd = text.indexOf('\n', lineStart).let { if (it == -1) text.length else it }
-                        lineStart + column.coerceAtMost(lineEnd - lineStart)
-                    }
-                }
-
-                val newPos = extracted.startOffset + newRelative
-                ic.setSelection(newPos, newPos)
-            }
-        }*/
 
         if (input.actions?.contains("moveSelectionLeft") == true) {
             val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
@@ -268,7 +196,10 @@ class TsplitInputMethodService : InputMethodService() {
     override fun onStartInputView(info: EditorInfo?, restarting: Boolean) {
         super.onStartInputView(info, restarting)
         keyboardImageView = keyboardView?.findViewById<ImageView>(R.id.imageView1)
-        KeyboardSettings.applyHeight(this, keyboardImageView)
+
+        // Re-apply in case the settings were changed in the app
+        KeyboardSettings.applyToKeyboardView(this, keyboardView)
+
         assignListeners()
         if (keyboardService == null) {
             keyboardService = KeyboardService(
@@ -281,7 +212,6 @@ class TsplitInputMethodService : InputMethodService() {
             )
         }
         keyboardService?.start()
-        updateBottomLine()
     }
 
     private val touches: MutableList<MutableMap<String, String>> = mutableListOf()

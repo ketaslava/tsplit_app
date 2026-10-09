@@ -1,37 +1,74 @@
 package com.ktvincco.tsplit
 
 import android.content.Context
+import android.content.res.Configuration
 import android.view.View
+
+enum class Setting(
+    val key: String,
+    val defaultDp: Int,
+    val minDp: Int,
+    val maxDp: Int
+) {
+    PORTRAIT_HEIGHT("keyboard_height_dp", 300, 50, 1200),
+    LANDSCAPE_HEIGHT("keyboard_height_landscape_dp", 200, 50, 1200),
+    BOTTOM_LINE_HEIGHT("bottom_line_height_dp", 50, 5, 1200)
+}
 
 object KeyboardSettings {
     const val PREFS_NAME = "keyboard_prefs"
-    const val KEY_KEYBOARD_HEIGHT_DP = "keyboard_height_dp"
+    const val KEY_BOTTOM_LINE_ENABLED = "bottom_line_enabled"
 
-    const val DEFAULT_HEIGHT_DP = 300
-    const val MIN_HEIGHT_DP = 100
-    const val MAX_HEIGHT_DP = 600
+    private fun prefs(context: Context) =
+        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
 
-    fun getHeightDp(context: Context): Int {
-        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        return prefs.getInt(KEY_KEYBOARD_HEIGHT_DP, DEFAULT_HEIGHT_DP)
-            .coerceIn(MIN_HEIGHT_DP, MAX_HEIGHT_DP)
+    fun get(context: Context, setting: Setting): Int {
+        return prefs(context).getInt(setting.key, setting.defaultDp)
+            .coerceIn(setting.minDp, setting.maxDp)
     }
 
-    /** Saves the value (clamped) and returns the value actually stored. */
-    fun setHeightDp(context: Context, dp: Int): Int {
-        val clamped = dp.coerceIn(MIN_HEIGHT_DP, MAX_HEIGHT_DP)
-        context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-            .edit()
-            .putInt(KEY_KEYBOARD_HEIGHT_DP, clamped)
-            .apply()
+    /** Clamps, saves and returns the value that was actually stored. */
+    fun set(context: Context, setting: Setting, dp: Int): Int {
+        val clamped = dp.coerceIn(setting.minDp, setting.maxDp)
+        prefs(context).edit().putInt(setting.key, clamped).apply()
         return clamped
     }
 
-    /** Applies the saved height to the touch surface (imageView1). */
-    fun applyHeight(context: Context, imageView: View?) {
-        imageView ?: return
-        val px = (getHeightDp(context) * context.resources.displayMetrics.density).toInt()
-        imageView.layoutParams = imageView.layoutParams?.apply { height = px }
-        imageView.requestLayout()
+    /** Valid number within range -> that number, anything else -> the default (300 for heights). */
+    fun parse(setting: Setting, text: String?): Int {
+        val value = text?.trim()?.toIntOrNull()
+        return if (value != null && value in setting.minDp..setting.maxDp) value
+        else setting.defaultDp
+    }
+
+    fun isBottomLineEnabled(context: Context): Boolean =
+        prefs(context).getBoolean(KEY_BOTTOM_LINE_ENABLED, true)
+
+    fun setBottomLineEnabled(context: Context, enabled: Boolean) {
+        prefs(context).edit().putBoolean(KEY_BOTTOM_LINE_ENABLED, enabled).apply()
+    }
+
+    fun isLandscape(context: Context): Boolean =
+        context.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    fun dpToPx(context: Context, dp: Int): Int =
+        (dp * context.resources.displayMetrics.density).toInt()
+
+    /** Applies saved heights to a keyboard layout (used by both the app and the IME). */
+    fun applyToKeyboardView(context: Context, root: View?) {
+        root ?: return
+
+        val heightSetting =
+            if (isLandscape(context)) Setting.LANDSCAPE_HEIGHT else Setting.PORTRAIT_HEIGHT
+        val touchSurface = root.findViewById<View>(R.id.imageView1)
+        touchSurface?.layoutParams = touchSurface?.layoutParams?.apply {
+            height = dpToPx(context, get(context, heightSetting))
+        }
+
+        val bottomLine = root.findViewById<View>(R.id.bottomLine)
+        bottomLine?.layoutParams = bottomLine?.layoutParams?.apply {
+            height = if (isBottomLineEnabled(context))
+                dpToPx(context, get(context, Setting.BOTTOM_LINE_HEIGHT)) else 0
+        }
     }
 }
