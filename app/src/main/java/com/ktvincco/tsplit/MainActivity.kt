@@ -31,7 +31,7 @@ import java.io.IOException
 class MainActivity : ComponentActivity() {
 
     // Step used by the "-" and "+" buttons (dp)
-    private val STEP_DP = 10
+    private val STEP_DP = 5
 
     // Create platform components
     private val androidLogger = AndroidLogger()
@@ -54,8 +54,11 @@ class MainActivity : ComponentActivity() {
         // Create view
         keyboardView = layoutInflater.inflate(R.layout.app_keyboard_test_layout, null)
 
-        // Settings controls
-        setupBottomLineSwitch()
+        // Bottom line switches (portrait / landscape)
+        bindBottomLineSwitch(R.id.bottomLineSwitch, false)
+        bindBottomLineSwitch(R.id.bottomLineLandscapeSwitch, true)
+
+        // Bottom line heights
         bindDpControl(
             Setting.BOTTOM_LINE_HEIGHT,
             R.id.bottomLineHeightInput,
@@ -63,6 +66,15 @@ class MainActivity : ComponentActivity() {
             R.id.plusBottomLineButton,
             R.id.setBottomLineButton
         )
+        bindDpControl(
+            Setting.BOTTOM_LINE_LANDSCAPE_HEIGHT,
+            R.id.bottomLineHeightLandscapeInput,
+            R.id.minusBottomLineLandscapeButton,
+            R.id.plusBottomLineLandscapeButton,
+            R.id.setBottomLineLandscapeButton
+        )
+
+        // Keyboard heights
         bindDpControl(
             Setting.PORTRAIT_HEIGHT,
             R.id.keyboardHeightInput,
@@ -92,11 +104,12 @@ class MainActivity : ComponentActivity() {
     }
 
 
-    private fun setupBottomLineSwitch() {
-        val bottomLineSwitch = keyboardView?.findViewById<Switch>(R.id.bottomLineSwitch)
-        bottomLineSwitch?.isChecked = KeyboardSettings.isBottomLineEnabled(this)
+    /** Connects one bottom line enable switch to its (portrait or landscape) setting. */
+    private fun bindBottomLineSwitch(switchId: Int, landscape: Boolean) {
+        val bottomLineSwitch = keyboardView?.findViewById<Switch>(switchId)
+        bottomLineSwitch?.isChecked = KeyboardSettings.isBottomLineEnabled(this, landscape)
         bottomLineSwitch?.setOnCheckedChangeListener { _, isChecked ->
-            KeyboardSettings.setBottomLineEnabled(this, isChecked)
+            KeyboardSettings.setBottomLineEnabled(this, landscape, isChecked)
             KeyboardSettings.applyToKeyboardView(this, keyboardView)
         }
     }

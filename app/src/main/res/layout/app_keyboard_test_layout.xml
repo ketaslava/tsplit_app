@@ -32,70 +32,16 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/select_input_method"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Select Input Method" />
-
-            <Button
                 android:id="@+id/open_input_settings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Open input settings" />
 
-            <!-- ===== Bottom line ===== -->
-            <TextView
+            <Button
+                android:id="@+id/select_input_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Bottom line"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Switch
-                android:id="@+id/bottomLineSwitch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Enable Bottom Line" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="H (dp)  " />
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/bottomLineHeightInput"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Bottom line height"
-                    android:inputType="number" />
-
-                <Button
-                    android:id="@+id/minusBottomLineButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="-" />
-
-                <Button
-                    android:id="@+id/plusBottomLineButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="+" />
-
-                <Button
-                    android:id="@+id/setBottomLineButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Set" />
-            </LinearLayout>
+                android:text="Select Input Method" />
 
             <!-- ===== Keyboard height: portrait ===== -->
             <TextView
@@ -186,6 +132,114 @@
 
                 <Button
                     android:id="@+id/setKeyboardHeightLandscapeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+            <!-- ===== Bottom line: portrait ===== -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Bottom line (portrait)"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/bottomLineSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Enable Bottom Line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="H (dp)  " />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bottomLineHeightInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Bottom line height"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/minusBottomLineButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <Button
+                    android:id="@+id/plusBottomLineButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+" />
+
+                <Button
+                    android:id="@+id/setBottomLineButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Set" />
+            </LinearLayout>
+
+            <!-- ===== Bottom line: landscape ===== -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Bottom line (landscape)"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Switch
+                android:id="@+id/bottomLineLandscapeSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="Enable Bottom Line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="H (dp)  " />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bottomLineHeightLandscapeInput"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Bottom line height (landscape)"
+                    android:inputType="number" />
+
+                <Button
+                    android:id="@+id/minusBottomLineLandscapeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="-" />
+
+                <Button
+                    android:id="@+id/plusBottomLineLandscapeButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+" />
+
+                <Button
+                    android:id="@+id/setBottomLineLandscapeButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Set" />
