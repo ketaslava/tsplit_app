@@ -303,6 +303,20 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
         Inputkey(Pair(2, 2), Pair(5, 3), previewText = ".", inputText = "."),
         Inputkey(Pair(2, 2), Pair(6, 3), previewText = "—", inputText = "—"),
 
+        Inputkey(Pair(1, 2), Pair(3, 3), previewText = "╱", inputText = "╱"),
+        Inputkey(Pair(1, 2), Pair(4, 3), previewText = "/", inputText = "/"),
+        Inputkey(Pair(1, 2), Pair(5, 3), previewText = "\\", inputText = "\\"),
+        Inputkey(Pair(1, 2), Pair(6, 3), previewText = "╲", inputText = "╲"),
+        Inputkey(Pair(1, 2), Pair(3, 4), previewText = "|", inputText = "|"),
+        Inputkey(Pair(1, 2), Pair(4, 4), previewText = "—", inputText = "—"),
+
+        Inputkey(Pair(1, 3), Pair(6, 2), previewText = "←", inputText = "←"),
+        Inputkey(Pair(2, 3), Pair(6, 2), previewText = "↑", inputText = "↑"),
+        Inputkey(Pair(3, 3), Pair(6, 2), previewText = "↓", inputText = "↓"),
+        Inputkey(Pair(4, 3), Pair(6, 2), previewText = "→", inputText = "→"),
+        Inputkey(Pair(3, 4), Pair(6, 2), previewText = "↕", inputText = "↕"),
+        Inputkey(Pair(4, 4), Pair(6, 2), previewText = "↔", inputText = "↔"),
+
         )),
 
     // ----------------------------------------------------------------------------------------
@@ -355,13 +369,13 @@ val keyboardStack = Stack(listOf<InputkeyPack>(
 
         Inputkey(Pair(1, 3), previewText = "XX", switchesToRemove = listOf("punctuation2")),
         Inputkey(Pair(2, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(3, 3), previewText = "|", inputText = "|"),
-        Inputkey(Pair(4, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(5, 3), previewText = "", inputText = ""),
-        Inputkey(Pair(6, 3), previewText = "", inputText = ""),
+        Inputkey(Pair(3, 3), previewText = "╱", inputText = "╱"),
+        Inputkey(Pair(4, 3), previewText = "/", inputText = "/"),
+        Inputkey(Pair(5, 3), previewText = "\\", inputText = "\\"),
+        Inputkey(Pair(6, 3), previewText = "╲", inputText = "╲"),
 
-        Inputkey(Pair(3, 4), previewText = "", inputText = ""),
-        Inputkey(Pair(4, 4), previewText = "", inputText = ""),
+        Inputkey(Pair(3, 4), previewText = "|", inputText = "|"),
+        Inputkey(Pair(4, 4), previewText = "—", inputText = "—"),
 
         )),
 
