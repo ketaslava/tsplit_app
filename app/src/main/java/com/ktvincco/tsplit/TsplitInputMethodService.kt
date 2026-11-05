@@ -116,6 +116,12 @@ class TsplitInputMethodService : InputMethodService() {
         }
 
         if (input.actions?.contains("moveCursorHorizontally") == true) {
+            val extracted = ic.getExtractedText(ExtractedTextRequest(), 0) ?: return
+            val cursor = extracted.selectionStart
+            val newPos = cursor + (input.amount ?: 0)
+            ic.setSelection(newPos, newPos)
+        }
+        /*if (input.actions?.contains("moveCursorHorizontally") == true) {
             val amount = input.amount ?: 0
             val keyCode = if (amount > 0) KeyEvent.KEYCODE_DPAD_RIGHT else KeyEvent.KEYCODE_DPAD_LEFT
 
@@ -123,7 +129,7 @@ class TsplitInputMethodService : InputMethodService() {
                 ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, keyCode))
                 ic.sendKeyEvent(KeyEvent(KeyEvent.ACTION_UP, keyCode))
             }
-        }
+        }*/
 
         if (input.actions?.contains("moveCursorVertically") == true) {
             val lines = -(input.amount ?: 0)
